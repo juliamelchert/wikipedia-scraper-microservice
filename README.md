@@ -21,8 +21,7 @@ If no image is found on the given Wikipedia page, the 'wiki_scraper.py' file wil
 take new requests after this occurs.
 
 NOTES:
-    - A request for an image is less specific than a request for a logo, so sometimes scraped images are also logos.
-    - If you encounter an error that says "certificate verify failed: unable to get local issuer certificate", you likely need to install
-      the "Install Certificates.command" file located in your Python download directory for this microservice to operate correctly. This 
-      is done by simply double clicking the "Install Certificates.command" file. More information on this can be found here: 
-      https://stackoverflow.com/questions/52805115/certificate-verify-failed-unable-to-get-local-issuer-certificate.
+
+A request for an image is less specific than a request for a logo, so sometimes scraped images are also logos.
+
+If you encounter an error that says "certificate verify failed: unable to get local issuer certificate", you likely need to install the "Install Certificates.command" file located in your Python download directory for this microservice to operate correctly. This is done by simply double clicking the "Install Certificates.command" file. More information on this can be found here: https://stackoverflow.com/questions/52805115/certificate-verify-failed-unable-to-get-local-issuer-certificate.
