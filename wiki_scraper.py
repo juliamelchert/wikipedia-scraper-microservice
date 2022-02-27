@@ -2,7 +2,7 @@
 # Date: 2/22/22
 # Description: A microservice that scrapes Wikipedia for company logos or general images, given a Wikipedia page's URL.
 
-import time, requests, os, urllib.request, re
+import time, requests, os, urllib.request, re, wikipedia
 from bs4 import BeautifulSoup
 
 # Runs infinitely in the background while waiting for a request to come in
@@ -25,16 +25,21 @@ while True:
             if os.path.exists('output.png') is True:
                 os.remove('output.png')
 
-            # Splits the request type and URL into two separate list items (ex. ["logo", www.example.com])
-            request = request.split()
+            if os.path.exists('output.txt') is True:
+                os.remove('output.txt')
 
-            page = requests.get(request[1])
-            soup = BeautifulSoup(page.content, "html.parser")
+            # Splits the request type and URL/search into two separate list items (ex. ["logo", "www.example.com"])
+            request = request.split("|")
 
             try:
 
                 # If the request is for a logo:
                 if request[0] == "logo":
+
+                    # Creates a BeautifulSoup object with the given URL
+                    page = requests.get(request[1])
+                    soup = BeautifulSoup(page.content, "html.parser")
+
                     # Finds the appropriate HTML and converts it into an image address
                     logo = soup.find("table", class_="infobox vcard")
 
@@ -53,7 +58,12 @@ while True:
                         urllib.request.urlretrieve(image_address, 'output.png')
 
                 # If the request is for an image:
-                elif request[0] == "image":                
+                elif request[0] == "image":         
+
+                    # Creates a BeautifulSoup object with the given URL
+                    page = requests.get(request[1])
+                    soup = BeautifulSoup(page.content, "html.parser")
+
                     # Finds the appropriate HTML and converts it into an image address
                     # Finds the first HTML element with a class name that has the word "infobox" in it
                     image = soup.find("table", **{'class' : re.compile('.*infobox.*')})
@@ -70,8 +80,19 @@ while True:
                         # Write image to output.png using the image address created above
                         urllib.request.urlretrieve(image_address, 'output.png')
 
+                elif request[0] == "summary":
+
+                    search_phrase = wikipedia.search(request[1], results = 1)
+
+                    with open('output.txt', 'w') as output:
+                        output.write(wikipedia.summary(search_phrase))
+
             finally:
 
-                # If no image was found, then "Image not found" is printed out.
-                if os.path.exists('output.png') is False:
+                # If no logo/image was found, then "Image not found" is printed out.
+                if (request[0] == "logo" or request[0] == "image") and os.path.exists('output.png') is False:
                     print("Image not found.")
+
+                # If no summary was found, then "Summary not found" is printed out.
+                if request[0] == "summary" and os.path.exists('output.txt') is False:
+                    print("Summary not found.")
