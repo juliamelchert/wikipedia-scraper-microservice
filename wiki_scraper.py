@@ -2,14 +2,11 @@
 # Date: 2/22/22
 # Description: A microservice that scrapes Wikipedia for company logos or general images, given a Wikipedia page's URL.
 
-import time, requests, os, urllib.request, re, wikipedia
+import requests, os, urllib.request, re, wikipedia
 from bs4 import BeautifulSoup
 
 # Runs infinitely in the background while waiting for a request to come in
 while True:
-
-    # Checks for a new request every second
-    time.sleep(1)
 
     # Checks if any changes have been made to the signal.txt file (i.e. if a request has been made)
     with open('signal.txt', 'r') as read_infile:
