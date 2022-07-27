@@ -1,4 +1,6 @@
-This is a microservice for scraping logos, images, and text summaries off of Wikipedia.
+# Wikipedia Scraper (Microservice)
+
+This is a microservice for scraping logos, images, and text summaries off of Wikipedia. It was implemented using the **Wikipedia API** and **BeautifulSoup**.
 
 It communicates with other programs through the 'signal.txt' file that is located in this directory.
 
@@ -10,24 +12,24 @@ If no image or summary is found on the given Wikipedia page, the 'wiki_scraper.p
 
 
 
-FOR IMAGE AND LOGO SCRAPING:
+### **FOR IMAGE AND LOGO SCRAPING:**
 
 If you wish to make a request, write the following to the 'signal.txt' file:
 the word "image" or "logo", then the URL of the Wikipedia page that this image or logo is featured on.
 
-EXAMPLE REQUESTS:
+##### **EXAMPLE REQUESTS:**
 
     image|https://en.wikipedia.org/wiki/Oregon_State_University
     
     logo|https://en.wikipedia.org/wiki/Apple_Inc.
 
 
-FOR TEXT SCRAPING:
+### **FOR TEXT SCRAPING:**
 
 If you wish to make a request, write the following to the 'signal.txt' file:
 the word "summary", a "|" character, then the title of the Wikipedia page that you wish to receive a text summary for.
 
-EXAMPLE REQUESTS:
+##### **EXAMPLE REQUESTS:**
 
     summary|fencing
 
