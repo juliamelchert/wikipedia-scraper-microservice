@@ -1,4 +1,5 @@
 # Wikipedia Scraper - Microservice
+*Author: Julia Melchert | Date Last Updated: 7/26/2022*
 
 This is a microservice for scraping logos, images, and text summaries off of Wikipedia. It was implemented using the **Wikipedia API** and **BeautifulSoup**.
 
